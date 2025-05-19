@@ -5,7 +5,11 @@ from stimulus import Stimulus
 from recorder import Recorder
 from collections import OrderedDict
 from utils import generate_group_sequence, play_beats_during_text
+# import win32api
+# import win32con
 import os
+os.environ['SDL_VIDEO_CENTERED'] = '1'  # 让窗口居中
+
 
 prefs.hardware['audioLib'] = ['ptb', 'pyo', 'sounddevice']
 prefs.hardware['audioLatencyMode'] = '3'
@@ -24,7 +28,28 @@ def wait_for_trigger(win):
         clean_exit(win)
 
 def main():
-    win = visual.Window(size=(1500, 1200), fullscr=False, color="black", units="norm", waitBlanking=True)
+    # # 获取屏幕大小
+    # screen_w = win32api.GetSystemMetrics(win32con.SM_CXSCREEN)
+    # screen_h = win32api.GetSystemMetrics(win32con.SM_CYSCREEN)
+    #
+    # # 设置窗口为屏幕 90% 大小
+    # win_w = int(screen_w * 0.9)
+    # win_h = int(screen_h * 0.9)
+
+    # 自己设置尺寸
+    win = visual.Window(size=(1200, 1000), fullscr=False, color="black", units="norm", waitBlanking=True)
+
+    # Mac 全屏
+    # win = visual.Window(fullscr=True, screen=0, color="black", units="norm", waitBlanking=True)
+
+    # win全屏
+    # win = visual.Window(
+    #     size=(win_w, win_h),
+    #     fullscr=False,
+    #     color="black",
+    #     units="norm",
+    #     waitBlanking=True
+    # )
     win.flip()  # 💡 强制刷新，确保窗口显示！
 
     # 📋 获取受试者信息
